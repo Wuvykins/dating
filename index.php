@@ -20,9 +20,23 @@ $f3->route('GET /', function() {
 });
 
 //route to personal webpage
-$f3->route('POST /personal', function() {
-    $view = new View();
-    echo $view->render('views/personal.html');
+$f3->route('POST /personal', function($f3) {
+    if(!empty($_POST))
+    {
+        include("model/personal_validation.php");
+        if ($valid)
+        {
+            $f3->reroute('set_profile');
+        }
+    }
+    $template = new Template();
+    echo $template->render('views/personal.html');
+});
+
+//route to set profile webpage
+$f3->route('GET /set_profile', function() {
+    $template = new Template();
+    echo $template->render('views/set_profile.html');
 });
 
 

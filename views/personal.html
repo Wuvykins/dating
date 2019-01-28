@@ -20,48 +20,51 @@
         <h1>Personal Information</h1>
     </div>
     <hr class="alert-secondary">
+    <form action="#" method="POST">
     <div class="row">
         <div class="col-7">
-            <form action="" method="POST">
 
                 <!-- First Name -->
                 <div>
                     <label class="font-weight-bold">First Name:</label>
-                    <input name="first" type="text" id="first" class="form-control">
+                    <input name="first" type="text" id="first" class="form-control" value="{{@_POST.first}}">
+                    <check if="@validFirst != true && !empty(@_POST)"><p class="alert-danger font-weight-bold">Must have a first name</p></check>
 
                 <!-- Last Name -->
 
                     <label class="font-weight-bold">Last Name:</label>
-                    <input name="last" type="text" id="last" class="form-control">
+                    <input name="last" type="text" id="last" class="form-control" value="{{@_POST.last}}">
+                    <check if="@validLast != true && !empty(@_POST)"><p class="alert-danger font-weight-bold">Must have a last name</p></check>
 
 
                 <!-- Age -->
 
                     <label class="font-weight-bold">Age:</label>
                     <input name="age" type="text" id="age" class="form-control">
+                    <check if="@validAge != true && !empty(@_POST)"><p class="alert-danger font-weight-bold">Must be 18 or older(numbers only)</p></check>
 
                 <!-- Gender -->
                     <label class="font-weight-bold">Gender</label>
                     <br>
                     <label class="font-weight-bold">
-                        <input type="radio" value="male">Male
-                    </label>
-                    &nbsp&nbsp
-                    <label class="font-weight-bold">
-                        <input type="radio" value="female">Female
+                        <input type="radio" value="male">&nbsp;Male
+                        &nbsp;&nbsp;
+                        <input type="radio" value="female">&nbsp;Female
                     </label>
                     <br>
 
                 <!--Phone number -->
 
                     <label class="font-weight-bold">Phone Number:</label>
-                    <input name="phone" type="text"  id="phone" class="form-control">
+                    <input placeholder="(NNN)NNN-NNNN" name="phone" type="text"  id="phone" class="form-control" value="{{@_POST.phone}}">
+                    <check if="@validNum != true && !empty(@_POST)"><p class="alert-danger font-weight-bold">Must be a valid number</p></check>
+
                 </div>
-            </form>
+
         </div>
         <div class="col-5">
             <p class="border border-dark rounded text-center"><span class="font-weight-bold">Note:</span> All information
-                entered is protected by our <a href="">Pricacy policy</a>. Profile information can only be viewed by
+                entered is protected by our <a href="">Privacy policy</a>. Profile information can only be viewed by
                 others with your permission.</p>
         </div>
     </div>
@@ -71,6 +74,7 @@
             <input type="submit" value="Next >" class="btn btn-primary">
         </div>
     </div>
+    </form>
 </div>
 </body>
 </html>
