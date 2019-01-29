@@ -29,4 +29,3 @@ $f3->set('validFirst', first($_POST['first']));
 $f3->set('validLast', last($_POST['last']));
 $f3->set('validAge', age($_POST['age']));
 $f3->set('validNum', age($_POST['phone']));
-$valid = first($_POST['first']) && last($_POST['last']) && age($_POST['age']) && number($_POST['phone']);
