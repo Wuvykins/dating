@@ -25,6 +25,8 @@ function number($phone)
 {
     return (preg_match("/^[0-9]{10}$/", $phone));
 }
+
+
 $f3->set('validFirst', first($_POST['first']));
 $f3->set('validLast', last($_POST['last']));
 $f3->set('validAge', age($_POST['age']));

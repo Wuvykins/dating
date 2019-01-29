@@ -22,7 +22,7 @@ $f3->route('GET /', function() {
 
 //route to personal webpage
 $f3->route('POST /personal', function($f3) {
-    if(!empty($_POST))
+    if(isset($_POST))
     {
         if (first($_POST['first']) && last($_POST['last']) && age($_POST['age']) && number($_POST['phone']))
         {
@@ -39,11 +39,28 @@ $f3->route('POST /personal', function($f3) {
 });
 
 //route to set profile webpage
-$f3->route('GET /set_profile', function() {
-
+$f3->route('GET|POST /set_profile', function($f3) {
+    if(!empty($_POST))
+    {
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['state'] = $_POST['state'];
+        $_SESSION['seek'] = $_POST['seek'];
+        $_SESSION['bio'] = $_POST['bio'];
+        $f3->reroute('interest');
+    }
     include('include/states.php');
     $template = new Template();
     echo $template->render('views/set_profile.html');
+});
+//route to set interest webpage
+$f3->route('GET|POST /interest', function() {
+    if(!empty($_POST))
+    {
+        //$_SESSION['email'] = $_POST['email'];
+
+    }
+    $template = new Template();
+    echo $template->render('views/interest.html');
 });
 
 

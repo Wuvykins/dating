@@ -20,35 +20,51 @@
         <h1>Profile</h1>
     </div>
     <hr class="alert-secondary">
-    <div class="row">
-        <form action="" method="POST">
-            <div class="col-6">
-                <div>
-                    <!--Email -->
-                    <label class="font-weight-bold">Email:</label>
-                    <input name="email" type="text" id="email" class="form-control">
+        <form action="#" method="POST">
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <!--Email -->
+                        <label class="font-weight-bold">Email:</label>
+                        <input name="email" type="text" id="email" class="form-control">
+                        <br>
 
-                    <!-- State -->
+                        <!-- State -->
+                        <label class="font-weight-bold">State</label>
+                        <br>
+                        <select class="w-100" name="state">
+                            <option>Select a State</option>
+                            <repeat group="{{ @SESSION.states }}" value="@state">
+                                <option value="@state">{{ @state }}</option>
+                            </repeat>
+                        </select>
+                        <br><br>
+                        <!--Seeking -->
+                        <label class="font-weight-bold">Seeking</label>
+                        <br>
+                        <label class="font-weight-bold">
+                            <input name="seek" type="radio" value="male">&nbsp;Male
+                        </label>
+                        <label class="font-weight-bold">
+                            &nbsp;&nbsp;
+                            <input name="seek" type="radio" value="female">&nbsp;Female
+                        </label>
+                        <br>
+                    </div>
+                </div>
 
-                    <!--Seeking -->
-                    <label class="font-weight-bold">Gender</label>
-                    <br>
-                    <label class="font-weight-bold">
-                        <input type="radio" value="male">Male
-                    </label>
-                    &nbsp&nbsp
-                    <label class="font-weight-bold">
-                        <input type="radio" value="female">Female
-                    </label>
+                <div class="col-6">
+                    <label class="font-weight-bold">Biography</label>
+                    <textarea name="bio" class="form-control rounded h-50 " value="bio" ></textarea>
                 </div>
             </div>
-
-            <div class="col-6">
-                <label class="font-weight-bold">Biography</label>
-                <textarea class="form-control rounded " value="bio"></textarea>
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <input type="submit" value="Next >" class="btn btn-primary">
+                </div>
             </div>
         </form>
-    </div>
 </div>
 </body>
 </html>
