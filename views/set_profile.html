@@ -27,6 +27,9 @@
                         <!--Email -->
                         <label class="font-weight-bold">Email:</label>
                         <input name="email" type="text" id="email" class="form-control">
+                        <check if="@validEmail != true && !empty(@_POST)"><p class="alert-danger font-weight-bold">
+                            Must be a valid email</p></check>
+
                         <br>
 
                         <!-- State -->
@@ -43,11 +46,11 @@
                         <label class="font-weight-bold">Seeking</label>
                         <br>
                         <label class="font-weight-bold">
-                            <input name="seek" type="radio" value="male">&nbsp;Male
+                            <input name="seek" type="radio" value="male" {{@male}}>&nbsp;Male
                         </label>
                         <label class="font-weight-bold">
                             &nbsp;&nbsp;
-                            <input name="seek" type="radio" value="female">&nbsp;Female
+                            <input name="seek" type="radio" value="female" {{@female}}>&nbsp;Female
                         </label>
                         <br>
                     </div>

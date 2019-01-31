@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/imageStyle.css">
+    <title>Summary</title>
+</head>
+<body>
+<div class="container col-lg-9 col-md-12">
+    <nav class="navbar navbar-light bg-light">
+        <a>Find love in the Nic of time</a>
+    </nav>
+</div>
+<div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
+    <div class="row">
+        <div class="col-6">
+            <table class="w-100">
+                <tr class="border border-secondary">
+                    <td class="p-2">Name: {{@SESSION.first}} {{@SESSION.last}}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Gender: {{@SESSION.gender}}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Age: {{@SESSION.age}}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">phone: {{@SESSION.phone}}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Email: {{@SESSION.email}}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">State: {{@SESSION.state}}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Seeking: {{@SESSION.seek}}</td>
+                </tr>
+                <tr class="border border-secondary">
+                    <td class="p-2">Interests: {{@SESSION.gender}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

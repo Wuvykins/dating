@@ -15,5 +15,41 @@
         <a>Find love in the Nic of time</a>
     </nav>
 </div>
+<div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
+    <div class="row col-12">
+        <h1>Interests</h1>
+    </div>
+    <hr class="alert-secondary">
+    <form action="#" method="POST">
+        <div class="row col-12">
+            <p class="font-weight-bold">In-door Interests</p>
+        </div>
+        <div class="row">
+            <repeat group="{{@SESSION.indoor}}" value="@interest">
+                <div class="col-3">
+                    <input type="checkbox" name="indoor[]">&nbsp;{{@interest}}
+                </div>
+            </repeat>
+        </div>
+        <br>
+        <div class="row col-12">
+            <p class="font-weight-bold">Out-door Interests</p>
+        </div>
+        <div class="row">
+            <repeat group="{{@SESSION.outdoor}}" value="@interest">
+                <div class="col-3">
+                    <input type="checkbox" name="outdoor[]">&nbsp;{{@interest}}
+                </div>
+            </repeat>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2">
+                <input type="submit" value="Next >" class="btn btn-primary">
+            </div>
+        </div>
+
+    </form>
+</div>
 </body>
 </html>

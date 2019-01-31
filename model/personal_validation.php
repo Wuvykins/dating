@@ -26,7 +26,15 @@ function number($phone)
     return (preg_match("/^[0-9]{10}$/", $phone));
 }
 
+function email($email)
+{
+    return strpos($email, '@') !== false && strpos(strtolower($email), '.com') !== false;
+}
+function indoor($indoor)
+{
 
+}
+$f3->set('validEmail', email($_POST['email']));
 $f3->set('validFirst', first($_POST['first']));
 $f3->set('validLast', last($_POST['last']));
 $f3->set('validAge', age($_POST['age']));

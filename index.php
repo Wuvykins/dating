@@ -33,6 +33,16 @@ $f3->route('POST /personal', function($f3) {
             $_SESSION['phone']=$_POST['phone'];
             $f3->reroute('set_profile');
         }
+        if ($_POST['gender']=='male')
+        {
+            $f3->set('male', "checked='checked'");
+            $f3->set('female', "");
+        }
+        elseif ($_POST['gender']=='female')
+        {
+            $f3->set('male', "");
+            $f3->set('female', "checked='checked'");
+        }
     }
     $template = new Template();
     echo $template->render('views/personal.html');
@@ -40,7 +50,7 @@ $f3->route('POST /personal', function($f3) {
 
 //route to set profile webpage
 $f3->route('GET|POST /set_profile', function($f3) {
-    if(!empty($_POST))
+    if(!empty($_POST) && email($_POST['email']))
     {
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['state'] = $_POST['state'];
@@ -48,19 +58,43 @@ $f3->route('GET|POST /set_profile', function($f3) {
         $_SESSION['bio'] = $_POST['bio'];
         $f3->reroute('interest');
     }
+    if ($_POST['seek']=='male')
+    {
+        $f3->set('male', "checked='checked'");
+        $f3->set('female', "");
+    }
+    elseif ($_POST['seek']=='female')
+    {
+        $f3->set('male', "");
+        $f3->set('female', "checked='checked'");
+    }
     include('include/states.php');
     $template = new Template();
     echo $template->render('views/set_profile.html');
 });
 //route to set interest webpage
-$f3->route('GET|POST /interest', function() {
+$f3->route('GET|POST /interest', function($f3) {
+    if(!empty($_POST))
+    {
+        $_SESSION['interests[]'] = $_POST['indoor[]'];
+        $f3->reroute('summary');
+    }
+    $f3->reroute('summary');
+    include('include/interests.php');
+    $template = new Template();
+    echo $template->render('views/interest.html');
+});
+
+//route to set summary webpage
+$f3->route('GET|POST /summary', function() {
     if(!empty($_POST))
     {
         //$_SESSION['email'] = $_POST['email'];
 
     }
+
     $template = new Template();
-    echo $template->render('views/interest.html');
+    echo $template->render('views/summary.html');
 });
 
 
