@@ -30,12 +30,25 @@ function email($email)
 {
     return strpos($email, '@') !== false && strpos(strtolower($email), '.com') !== false;
 }
-function indoor($indoor)
+function validIndoor($indoor)
 {
-
+    foreach ($indoor as $interest)
+    {
+        if(!in_array($interest, $_SESSION['outdoor']))
+        {
+            return false;
+        }
+    }
+    return true;
 }
-$f3->set('validEmail', email($_POST['email']));
-$f3->set('validFirst', first($_POST['first']));
-$f3->set('validLast', last($_POST['last']));
-$f3->set('validAge', age($_POST['age']));
-$f3->set('validNum', age($_POST['phone']));
+function validOutdoor($outdoor)
+{
+    foreach ($outdoor as $interest)
+    {
+        if(!in_array($interest, $_SESSION['outdoor']))
+        {
+            return false;
+        }
+    }
+    return true;
+}

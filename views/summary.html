@@ -19,40 +19,44 @@
 <div class="container col-lg-8 col-md-12 border border-info rounded p-4 mt-4">
     <div class="row">
         <div class="col-6">
-            <table class="w-100">
-                <tr class="border border-secondary">
-                    <td class="p-2">Name: {{@SESSION.first}} {{@SESSION.last}}</td>
-                </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">Gender: {{@SESSION.gender}}</td>
-                </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">Age: {{@SESSION.age}}</td>
-                </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">phone: {{@SESSION.phone}}</td>
-                </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">Email: {{@SESSION.email}}</td>
-                </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">State: {{@SESSION.state}}</td>
-                </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">Seeking: {{@SESSION.seek}}</td>
-                </tr>
-                <tr class="border border-secondary">
-                    <td class="p-2">Interests: {{@SESSION.allInterest}}</td>
-                </tr>
-            </table>
+            <div class="border rounded">
+                <div class="border-bottom">
+                    <p class="p-2 my-1">Name: {{@SESSION.first}} {{@SESSION.last}}</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="p-2 my-1">Gender: {{@SESSION.gender}}</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="p-2 my-1">Age: {{@SESSION.age}}</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="p-2 my-1">phone: {{@SESSION.phone}}</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="p-2 my-1">Email: {{@SESSION.email}}</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="p-2 my-1">State: {{@SESSION.state}}</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="p-2 my-1">Seeking: {{@SESSION.seek}}</p>
+                </div>
+                <div class="border-bottom">
+                    <p class="p-2 my-1">Interests: {{@SESSION.allInterest}}</p>
+                </div>
+            </div>
         </div>
-        <div class="col-6 row">
-            <img id='avatar' src="images/avatar.jpg" class="rounded h-50 w-50">
+        <div class="col-6">
+            <div class="text-center">
+            <img id='avatar' src="images/avatar.jpg" alt="profile img" class="rounded w-75">
+            </div>
+            <br>
+            <label>Biography: </label>
+            <p>{{@SESSION.bio}}</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-5"></div>
-            <input type="submit" name="submit" value="Contact Me!" class="btn btn-primary">
+            <input type="submit" name="submit" value="Contact Me!" class="btn btn-primary mx-auto">
     </div>
 </div>
 </body>

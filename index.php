@@ -33,16 +33,6 @@ $f3->route('POST /personal', function($f3) {
             $_SESSION['phone']=$_POST['phone'];
             $f3->reroute('set_profile');
         }
-        if ($_POST['gender']=='male')
-        {
-            $f3->set('male', "checked='checked'");
-            $f3->set('female', "");
-        }
-        elseif ($_POST['gender']=='female')
-        {
-            $f3->set('male', "");
-            $f3->set('female', "checked='checked'");
-        }
     }
     $template = new Template();
     echo $template->render('views/personal.html');
@@ -58,16 +48,7 @@ $f3->route('GET|POST /set_profile', function($f3) {
         $_SESSION['bio'] = $_POST['bio'];
         $f3->reroute('interest');
     }
-    if ($_POST['seek']=='male')
-    {
-        $f3->set('male', "checked='checked'");
-        $f3->set('female', "");
-    }
-    elseif ($_POST['seek']=='female')
-    {
-        $f3->set('male', "");
-        $f3->set('female', "checked='checked'");
-    }
+
     include('include/states.php');
     $template = new Template();
     echo $template->render('views/set_profile.html');
@@ -76,6 +57,7 @@ $f3->route('GET|POST /set_profile', function($f3) {
 $f3->route('GET|POST /interest', function($f3) {
     if(isset($_POST['submit']))
     {
+
         if (!empty($_POST['indoor']))
         {
             $indoor = implode(", ", $_POST['indoor']);
@@ -86,14 +68,36 @@ $f3->route('GET|POST /interest', function($f3) {
         }
         if (!empty($_POST['indoor']) && empty($_POST['outdoor']))
         {
+            //spoofing
+            foreach ($_POST['indoor'] as $interest)
+            {
+                if (!validIndoor($_POST['indoor']))
+                {
+                    $f3->reroute('interest');
+                }
+            }
             $_SESSION['allInterest'] = $indoor;
         }
         elseif(!empty($_POST['outdoor']) && empty($_POST['indoor']))
         {
+            if (!validOutdoor($_POST['outdoor']))
+            {
+                $f3->reroute('interest');
+            }
             $_SESSION['allInterest'] = $outdoor;
         }
         elseif (!empty($_POST['outdoor']) && !empty($_POST['indoor']))
         {
+            //spoofing
+            if (!validIndoor($_POST['indoor']))
+            {
+                $f3->reroute('interest');
+            }
+
+            if (!validOutdoor($_POST['outdoor']))
+            {
+                $f3->reroute('interest');
+            }
             $_SESSION['allInterest'] = $indoor . ', ' . $outdoor;
         }
         else

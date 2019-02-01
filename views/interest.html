@@ -38,7 +38,8 @@
         <div class="row">
             <repeat group="{{@SESSION.outdoor}}" value="@interest">
                 <div class="col-3">
-                    <input type="checkbox" name="outdoor[]" value={{"@interest"}}>&nbsp;{{@interest}}
+                    <input type="checkbox" name="outdoor[]" value="{{@interest}}"
+                    <check if="{{in_array(@interest, @POST.indoor) }}">checked='checked'</check>>&nbsp;{{@interest}}
                 </div>
             </repeat>
         </div>

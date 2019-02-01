@@ -27,7 +27,7 @@
                         <!--Email -->
                         <label class="font-weight-bold">Email:</label>
                         <input name="email" type="text" id="email" class="form-control">
-                        <check if="@validEmail != true && !empty(@_POST)"><p class="alert-danger font-weight-bold">
+                        <check if="!email(@POST.email) && !empty(@_POST)"><p class="alert-danger font-weight-bold">
                             Must be a valid email</p></check>
 
                         <br>
@@ -38,7 +38,8 @@
                         <select class="w-100" name="state">
                             <option>Select a State</option>
                             <repeat group="{{ @SESSION.states }}" value="@state">
-                                <option value={{"@state"}}>{{ @state }}</option>
+                                <option value="{{@state}}"
+                                <check if="@POST.state == @state">selected="selected"</check>>{{ @state }}</option>
                             </repeat>
                         </select>
                         <br><br>
@@ -46,11 +47,13 @@
                         <label class="font-weight-bold">Seeking</label>
                         <br>
                         <label class="font-weight-bold">
-                            <input name="seek" type="radio" value="male" {{@male}}>&nbsp;Male
+                            <input name="gender" type="radio" value="male"
+                            <check if="@POST.gender == 'male'">checked='checked'</check>>&nbsp;Male
                         </label>
                         <label class="font-weight-bold">
                             &nbsp;&nbsp;
-                            <input name="seek" type="radio" value="female" {{@female}}>&nbsp;Female
+                            <input name="seek" type="radio" value="female"
+                            <check if="@POST.gender == 'female'">checked='checked'</check>>&nbsp;Female
                         </label>
                         <br>
                     </div>
@@ -58,7 +61,7 @@
 
                 <div class="col-6">
                     <label class="font-weight-bold">Biography</label>
-                    <textarea name="bio" class="form-control rounded h-50 " value="bio" ></textarea>
+                    <textarea name="bio" class="form-control rounded h-50 " >{{@POST.bio}}</textarea>
                 </div>
             </div>
             <div class="row">
