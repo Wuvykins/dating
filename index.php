@@ -74,12 +74,35 @@ $f3->route('GET|POST /set_profile', function($f3) {
 });
 //route to set interest webpage
 $f3->route('GET|POST /interest', function($f3) {
-    if(!empty($_POST))
+    if(isset($_POST['submit']))
     {
-        $_SESSION['interests[]'] = $_POST['indoor[]'];
+        if (!empty($_POST['indoor']))
+        {
+            $indoor = implode(", ", $_POST['indoor']);
+        }
+        if (!empty($_POST['outdoor']))
+        {
+            $outdoor = implode(", ", $_POST['outdoor']);
+        }
+        if (!empty($_POST['indoor']) && empty($_POST['outdoor']))
+        {
+            $_SESSION['allInterest'] = $indoor;
+        }
+        elseif(!empty($_POST['outdoor']) && empty($_POST['indoor']))
+        {
+            $_SESSION['allInterest'] = $outdoor;
+        }
+        elseif (!empty($_POST['outdoor']) && !empty($_POST['indoor']))
+        {
+            $_SESSION['allInterest'] = $indoor . ', ' . $outdoor;
+        }
+        else
+        {
+            $_SESSION['allInterest'] = '';
+        }
         $f3->reroute('summary');
     }
-    $f3->reroute('summary');
+
     include('include/interests.php');
     $template = new Template();
     echo $template->render('views/interest.html');

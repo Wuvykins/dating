@@ -38,7 +38,7 @@
                         <select class="w-100" name="state">
                             <option>Select a State</option>
                             <repeat group="{{ @SESSION.states }}" value="@state">
-                                <option value="@state">{{ @state }}</option>
+                                <option value={{"@state"}}>{{ @state }}</option>
                             </repeat>
                         </select>
                         <br><br>

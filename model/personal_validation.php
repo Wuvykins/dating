@@ -18,7 +18,7 @@ function last($last)
 
 function age($age)
 {
-    return ctype_alnum($age) && $age<= 18;
+    return ctype_alnum($age) && $age>= 18;
 }
 
 function number($phone)
