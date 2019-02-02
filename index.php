@@ -61,21 +61,21 @@ $f3->route('GET|POST /interest', function($f3) {
         if (!empty($_POST['indoor']))
         {
             $indoor = implode(", ", $_POST['indoor']);
+            $f3->set('indoor',$_POST['indoor']);
         }
         if (!empty($_POST['outdoor']))
         {
             $outdoor = implode(", ", $_POST['outdoor']);
+            $f3->set('outdoor',$_POST['outdoor']);
         }
+
         if (!empty($_POST['indoor']) && empty($_POST['outdoor']))
         {
             //spoofing
-            foreach ($_POST['indoor'] as $interest)
-            {
                 if (!validIndoor($_POST['indoor']))
                 {
                     $f3->reroute('interest');
                 }
-            }
             $_SESSION['allInterest'] = $indoor;
         }
         elseif(!empty($_POST['outdoor']) && empty($_POST['indoor']))

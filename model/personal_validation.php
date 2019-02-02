@@ -34,7 +34,7 @@ function validIndoor($indoor)
 {
     foreach ($indoor as $interest)
     {
-        if(!in_array($interest, $_SESSION['outdoor']))
+        if(!in_array($interest, $_SESSION['indoor']))
         {
             return false;
         }
