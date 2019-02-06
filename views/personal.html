@@ -40,7 +40,7 @@
                 <!-- Age -->
 
                     <label class="font-weight-bold">Age:</label>
-                    <input name="age" type="text" id="age" class="form-control">
+                    <input name="age" type="text" id="age" class="form-control" value="{{@_POST.age}}">
                     <check if="!age(@POST.age) && !empty(@_POST)"><p class="alert-danger font-weight-bold">Must be 18 or older(numbers only)</p></check>
 
                 <!-- Gender -->
