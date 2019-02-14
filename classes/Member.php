@@ -31,7 +31,7 @@ class Member
      * @param $seeking String representation of the gender the person is seeking
      * @param $_bio String representation of the bio of the individual
      */
-    public function __construct($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio)
+    public function __construct($fname, $lname, $age, $gender, $phone)
     {
         $this->_fname = $fname;
         $this->_lname = $lname;

@@ -26,12 +26,20 @@ $f3->route('POST /personal', function($f3) {
     {
         if (first($_POST['first']) && last($_POST['last']) && age($_POST['age']) && number($_POST['phone']))
         {
-            $_SESSION['first']=$_POST['first'];
-            $_SESSION['last']=$_POST['last'];
-            $_SESSION['age']=$_POST['age'];
-            $_SESSION['gender']=$_POST['gender'];
-            $_SESSION['phone']=$_POST['phone'];
-            $_SESSION['premium'] = $_POST['premium'];
+            $first=$_POST['first'];
+            $last=$_POST['last'];
+            $age=$_POST['age'];
+            $gender=$_POST['gender'];
+            $phone=$_POST['phone'];
+            $premium = $_POST['premium'];
+            if ($_SESSION['premium'] == 'premium')
+            {
+                $member = new PremiumMember($first, $last, $age, $gender, $phone, $premium);
+            }
+            else{
+                $member = new Member($first, $last, $age, $gender, $phone, $premium);
+            }
+            $_SESSION['member'] = $member;
             $f3->reroute('set_profile');
         }
     }
