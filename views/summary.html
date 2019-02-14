@@ -21,29 +21,30 @@
         <div class="col-6">
             <div class="border rounded">
                 <div class="border-bottom">
-                    <p class="p-2 my-1">Name: {{@SESSION.first}} {{@SESSION.last}}</p>
+                    <p class="p-2 my-1">Name: {{@SESSION.member->getFname()}} {{@SESSION.member->getLname()}}</p>
                 </div>
                 <div class="border-bottom">
-                    <p class="p-2 my-1">Gender: {{@SESSION.gender}}</p>
+                    <p class="p-2 my-1">Gender: {{@SESSION.member->getGender()}}</p>
                 </div>
                 <div class="border-bottom">
-                    <p class="p-2 my-1">Age: {{@SESSION.age}}</p>
+                    <p class="p-2 my-1">Age: {{@SESSION.member->getAge()}}</p>
                 </div>
                 <div class="border-bottom">
-                    <p class="p-2 my-1">phone: {{@SESSION.phone}}</p>
+                    <p class="p-2 my-1">phone: {{@SESSION.member->getPhone()}}</p>
                 </div>
                 <div class="border-bottom">
-                    <p class="p-2 my-1">Email: {{@SESSION.email}}</p>
+                    <p class="p-2 my-1">Email: {{@SESSION.member->getEmail()}}</p>
                 </div>
                 <div class="border-bottom">
-                    <p class="p-2 my-1">State: {{@SESSION.state}}</p>
+                    <p class="p-2 my-1">State: {{@SESSION.member->getState()}}</p>
                 </div>
                 <div class="border-bottom">
-                    <p class="p-2 my-1">Seeking: {{@SESSION.seek}}</p>
+                    <p class="p-2 my-1">Seeking: {{@SESSION.member->getSeeking()}}</p>
                 </div>
-                <check if="@SESSION.premium == 'premium'">
+                <check if="get_class(@SESSION.member) == 'PremiumMember'">
                     <div class="border-bottom">
-                        <p class="p-2 my-1">Interests: {{@SESSION.allInterest}}</p>
+                        <p class="p-2 my-1">Interests: {{implode(' ', @SESSION.member->getInDoorInterests())}}
+                            {{implode(' ', @SESSION.member->getOutDoorInterests())}}</p>
                     </div>
                 </check>
             </div>
