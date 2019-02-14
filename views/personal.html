@@ -62,7 +62,12 @@
                     <label class="font-weight-bold">Phone Number:</label>
                     <input placeholder="(NNN)NNN-NNNN" name="phone" type="text"  id="phone" class="form-control" value="{{@_POST.phone}}">
                     <check if="!number(@POST.phone) && !empty(@_POST)"><p class="alert-danger font-weight-bold">Must be a valid number</p></check>
-
+                    <br>
+                <!-- Premium membership -->
+                    <label class="font-weight-bold">Premium Membership</label>
+                    <br>
+                    <input type="checkbox" name="premium" value="premium" <check if="@POST.premium == 'premium'">checked='checked'</check>>
+                    Sign me up for a premium membership
                 </div>
 
         </div>

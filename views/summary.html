@@ -41,9 +41,11 @@
                 <div class="border-bottom">
                     <p class="p-2 my-1">Seeking: {{@SESSION.seek}}</p>
                 </div>
-                <div class="border-bottom">
-                    <p class="p-2 my-1">Interests: {{@SESSION.allInterest}}</p>
-                </div>
+                <check if="@SESSION.premium == 'premium'">
+                    <div class="border-bottom">
+                        <p class="p-2 my-1">Interests: {{@SESSION.allInterest}}</p>
+                    </div>
+                </check>
             </div>
         </div>
         <div class="col-6">

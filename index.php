@@ -31,6 +31,7 @@ $f3->route('POST /personal', function($f3) {
             $_SESSION['age']=$_POST['age'];
             $_SESSION['gender']=$_POST['gender'];
             $_SESSION['phone']=$_POST['phone'];
+            $_SESSION['premium'] = $_POST['premium'];
             $f3->reroute('set_profile');
         }
     }
@@ -46,7 +47,16 @@ $f3->route('GET|POST /set_profile', function($f3) {
         $_SESSION['state'] = $_POST['state'];
         $_SESSION['seek'] = $_POST['seek'];
         $_SESSION['bio'] = $_POST['bio'];
-        $f3->reroute('interest');
+        if ($_SESSION['premium'] == 'premium')
+        {
+            $f3->reroute('interest');
+
+        }
+        else {
+            print_r($_SESSION['premium']);
+            $f3->reroute('summary');
+        }
+
     }
 
     include('include/states.php');
