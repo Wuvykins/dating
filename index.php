@@ -125,14 +125,37 @@ $f3->route('GET|POST /interest', function($f3) {
 
 //route to set summary webpage
 $f3->route('GET|POST /summary', function() {
-    if(!empty($_POST))
-    {
-        //$_SESSION['email'] = $_POST['email'];
 
-    }
+    //connect to the database
+    $db = new Database();
+    $db->connect();
+    $db->insertMember();
 
     $template = new Template();
     echo $template->render('views/summary.html');
+});
+
+$f3->route('GET|POST /admin', function($f3) {
+
+    //connect to database
+    $db = new Database();
+    $db->connect();
+    $members = $db->getMembers();
+    $f3->set('members', $members);
+
+    $template = new Template();
+    echo $template->render('views/admin.html');
+});
+
+$f3->route('GET|POST /admin/@id', function($f3, $params) {
+    $id = $params['id'];
+    $db = new Database();
+    $db->connect();
+    $member = $db->getMember($id);
+    $f3->set('member', $member);
+    //load a template
+    $template = new Template();
+    echo $template->render('views/member.html');
 });
 
 

@@ -21,7 +21,7 @@ class Database
             //instantiate a database object, I had to put it into a global because insert member wouldnt have access to
             //it if I hadn't
             $GLOBALS[dbh] = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-            echo 'connected to database!';
+            //echo 'connected to database!';
         }
         catch(PDOException $e)
         {
@@ -49,46 +49,25 @@ class Database
         $image = "";
 
         //If member is premium it returns a 1 and if its not it returns 0
-        $premium = function($member)
-                    {
-                        if (get_class($member)== 'PremiumMember')
-                        {
-                            return 1;
-                        }
-                        else
-                        {
-                            return 0;
-                        }
-                    };
+        $premium = get_class($member) == 'PremiumMember' ? 1 : 0;
 
         //I need to get the interests from the getters but only if the member is a premium member
-        $interests = function($member)
-                {
-                    if (get_class($member)== 'PremiumMember')
-                    {
-                        if(!empty($member->getInDoorInterests()) && !empty($member->getOutDoorInterests()))
-                        {
-                            return implode(', ', $member->getInDoorInterests()) . ', ' . implode(', ', $member->getOutDoorInterests());
-                        }
-                        else if(!empty($member->getInDoorInterests()))
-                        {
-                            return implode(', ', $member->getInDoorInterests());
-                        }
-                        else if(!empty($member->getOutDoorInterests()))
-                        {
-                            return implode(', ', $member->getOutDoorInterests());
-                        }
-                    }
-                    //member isnt premium
-                    else
-                    {
-                        return null;
-                    }
-                };
+        $interests = null;
 
+        if((boolean)$premium) {
+            if(!empty($member->getInDoorInterests()) && !empty($member->getOutDoorInterests())) {
+                $interests = implode(', ', $member->getInDoorInterests()) . ', ' . implode(', ', $member->getOutDoorInterests());
+            }
+            else if(!empty($member->getInDoorInterests())) {
+                $interests = implode(', ', $member->getInDoorInterests());
+            }
+            else if(!empty($member->getOutDoorInterests())) {
+                $interests = implode(', ', $member->getOutDoorInterests());
+            }
+        }
 
         //define the query
-        $sql = "INSERT INTO datingMembers
+        $sql = "INSERT INTO members
             (fname, lname, age, gender, phone, email, state, seeking, bio, premium, image, interests)
             VALUES(:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio, :premium, :image, :interests)";
 
@@ -112,8 +91,7 @@ class Database
 
         //Execute
         $statement->execute();
-        $id = $dbh->lastInsertId();
-        echo "<p>Pet $id inserted successfully.</p>";
+
 
         //brandon found this and posted it in the discussion so hopefully its ok that I "plagiarized"
         $arr = $statement->errorInfo();
@@ -126,22 +104,22 @@ class Database
     function getMembers()
     {
         global $dbh;
-        $sql = "SELECT * FROM members";
+        $sql = "SELECT * FROM members ORDER BY lname, fname";
         $statement = $dbh->prepare($sql);
         $statement->execute();
-
-        $arr = $statement->errorInfo();
-        if(isset($arr[2])) {
-            print_r($arr[2]);
-        }
-
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
     function getMember($id)
     {
-
+        global $dbh;
+        $sql = "SELECT * FROM members WHERE id = :id";
+        $statement = $dbh->prepare($sql);
+        $statement->bindParam(':id',$id,PDO::PARAM_STR);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
 
