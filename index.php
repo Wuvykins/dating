@@ -140,6 +140,8 @@ $f3->route('GET|POST /admin', function($f3) {
     //connect to database
     $db = new Database();
     $db->connect();
+
+    //grabs the members from the database
     $members = $db->getMembers();
     $f3->set('members', $members);
 
@@ -148,11 +150,18 @@ $f3->route('GET|POST /admin', function($f3) {
 });
 
 $f3->route('GET|POST /admin/@id', function($f3, $params) {
+
+    //gets the id to search through the database
     $id = $params['id'];
+
+    //connect
     $db = new Database();
     $db->connect();
+
+    //grabs the member with the id
     $member = $db->getMember($id);
     $f3->set('member', $member);
+
     //load a template
     $template = new Template();
     echo $template->render('views/member.html');
