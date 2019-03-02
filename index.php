@@ -31,6 +31,7 @@ $f3->route('POST /personal', function($f3) {
             $age=$_POST['age'];
             $gender=$_POST['gender'];
             $phone=$_POST['phone'];
+            $phone = formatNumber($phone);
             $premium = $_POST['premium'];
             if ($premium == 'premium')
             {

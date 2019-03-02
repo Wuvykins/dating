@@ -26,6 +26,18 @@ function number($phone)
     return (preg_match("/^[0-9]{10}$/", $phone));
 }
 
+function formatNumber($phone)
+{
+    //puts in the dash
+    $phone = substr_replace($phone, '-', 6, 0);
+    //puts in one of the parenthesis
+    $phone = substr_replace($phone, ')', 3, 0);
+    //puts in the other parenthesis
+    $phone = substr_replace($phone, '(', 0, 0);
+
+    return $phone;
+}
+
 function email($email)
 {
     return strpos($email, '@') !== false && strpos(strtolower($email), '.com') !== false;
